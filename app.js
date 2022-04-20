@@ -10,9 +10,10 @@ checkButton.addEventListener("click", function checkAmount() {
     message.style.display = "none";
     if (billAmount.value > 0) {
         if (cashGiven.value >= billAmount.value) {
-
+            const returnAmount = cashGiven.value - billAmount.value;
+            calculateChange(returnAmount);
         } else {
-            showErrorMessage("DO YOU WAN TO WASH PLATES??? 😡")
+            showErrorMessage("DO YOU WANT TO WASH PLATES??? 😡")
         }
 
     } else {
@@ -21,19 +22,18 @@ checkButton.addEventListener("click", function checkAmount() {
 
 });
 
+function calculateChange(returnAmount) {
+    for (let i = 0; i < notesAvailable.length; i++) {
+        const numberOfNotes = Math.trunc(returnAmount / notesAvailable[i]);
+        returnAmount %= notesAvailable[i];
+        noOfNotes[i].innerText = numberOfNotes;
+
+
+    }
+}
 
 function showErrorMessage(msg) {
 
     message.style.display = "block";
     message.innerText = msg;
 };
-
-
-
-
-// // function calulateAmount(returnAmount) {
-// //     for (let i = 0; i < notesAvailable.lenghth; i++) {
-// //         const numberOfNotes = Math.trunc(returnAmount / notesAvailable[i]);
-// //         returnAmount %= notesAvailable[i];
-// //         noOfNotes[i].innerText = numberOfNotes;
-// //     };
